@@ -1,0 +1,17 @@
+
+There are still some sequences that are not found 
+by RF that should be....
+
+Here are Vgenextractor seq that should be detected:
+
+1   Vs154  trdv   Chr_7   1263955
+
+2   Vs97   trbv   Chr_3   849127
+
+3   Vs141  trav   Chr_3   874916   *** probably misclassifed by VExtr
+
+4   Vs108  trav   Chr_7   376251
+
+5   Vs184  trav   Scaff.309   1500
+
+6   Vs132  trav   Chr_7    839337  

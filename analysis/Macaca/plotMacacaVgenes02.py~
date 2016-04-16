@@ -1,0 +1,250 @@
+#!/usr/bin/env python
+"""
+   dnolivieri: updated 28-march-2015
+
+     plots the loci for results.
+grep \> Macaca_mulatta_MMUL1_r_4_outRF.fasta | grep trbv | awk -F"|" '{split($1,a,"-"); gsub(/>/,"",a[1]);  gsub(/\(/, "",$2); gsub(/\)/, "",$2); split($2,b,","); print a[1], b[1], b[2]}'
+
+{ '1099214757507':[[0,5000]],
+          '1099214148171':[[0,5000]],
+          '1099548049584':[[0,1201553]],
+          '1099214128018':[[0,30000]],
+          '1099214732309':[[0,30000]],
+          '10':[[65303593,66836272]],
+          '13':[[88936957,90747293]],
+          '13':[[112709235,113709678]],
+          '7':[[83967455,85625679]],
+          '3':[[179305555,180669600]]
+          }
+
+
+
+
+"""
+
+
+import collections
+import itertools
+import cPickle as pickle
+import sys
+import re
+import json
+
+
+import numpy as np
+import matplotlib
+from matplotlib.patches import Circle, Wedge, Polygon, Rectangle
+from matplotlib.collections import PatchCollection
+import matplotlib.lines as mlines
+import matplotlib.pyplot as plt
+import itertools
+
+
+class plotExonMap:
+    def __init__(self, exonLabels, exons, xstart, xend ):
+        self.height = 0.25
+
+        self.exonLabels = exonLabels
+        self.exons = exons
+
+        self.xstart = xstart
+        self.xend = xend
+        self.xLower = -400
+        self.xUpper =  4450 #6236
+        
+    def plot_refexons(self, fig, ax):
+       
+        x=1
+        width=5
+        patches=[]
+        y=5.0
+
+        cnt=0
+        for p in self.exons:
+            x= p[0]-xstart
+            width= p[1] - p[0]
+            print x, width
+            rect= Rectangle( (x,y), width, self.height )
+            patches.append(rect)
+
+            epsilon=-0.35
+
+            ax.annotate(self.exonLabels[cnt], (x+(width)/2.,y-epsilon),
+                        fontsize=10, ha='center', va='center')
+            cnt+=1
+
+
+        colors = 100*np.random.rand(len(patches))
+        q = PatchCollection(patches, cmap=matplotlib.cm.jet, alpha=0.6)
+        q.set_array(np.array(colors))
+        ax.add_collection(q)
+
+        
+        ax.set_xlim([self.xLower, self.xUpper])
+        ax.set_ylim([4, 6])
+
+
+
+    def plot_Vexons(self, ybar, Vbar, fig, ax):
+       
+        x=1
+        width=5
+        patches=[]
+        y=ybar
+
+        cnt=0
+        for p in Vbar:
+            x= p[0]-xstart
+            width= p[1] - p[0]
+            print x, width
+            rect= Rectangle( (x,y), width, self.height )
+            patches.append(rect)
+
+            epsilon=-0.35
+            """
+            ax.annotate(self.exonLabels[cnt], (x+(width)/2.,y-epsilon),
+                        fontsize=10, ha='center', va='center')
+            """
+            cnt+=1
+
+
+        colors = 100*np.random.rand(len(patches))
+        q = PatchCollection(patches, cmap=matplotlib.cm.jet, alpha=0.6)
+        q.set_array(np.array(colors))
+        ax.add_collection(q)
+        ax.set_xlim([self.xLower, self.xUpper])
+        ax.set_ylim([4, 6])
+
+
+
+
+    def plot_exons(self, strand, cand_exons, best_exons, fig, ax):
+        patches=[]
+        patchesBest = []
+        y=4.0
+        ymax = 4.
+        height = 0.2
+        xlast=0 
+        epsilon=-0.35
+
+        cnt=0
+        for p in cand_exons:
+            if strand<0:
+                x= (self.xend - self.xstart)  - p[0] 
+            else: 
+                x= p[0] 
+
+            width= strand * (p[1] - p[0])
+            print x, width
+
+            if cnt in best_exons:
+                rect= Rectangle( (x,ymax), width, height )
+                patchesBest.append(rect)
+            else:
+                rect= Rectangle( (x,y), width, height )
+                patches.append(rect)
+
+            exNum = cnt
+
+            if cnt in best_exons:
+                ax.annotate(str(exNum), (x+(width)/2., ymax-(self.height/2.+epsilon)), fontsize=8, ha='center', va='center')
+            else: 
+                ax.annotate(str(exNum), (x+(width)/2., y-(self.height/2.+epsilon)), fontsize=8, ha='center', va='center')
+
+            if np.abs(x-xlast)>100:
+                y = y+0.075
+            else: 
+                y = y-0.075
+            xlast = x
+            cnt+=1
+
+        colors = 100*np.random.rand(len(patches))
+        q = PatchCollection(patches, cmap=matplotlib.cm.jet, alpha=0.2)
+        q.set_array(np.array(colors))
+        ax.add_collection(q)
+
+        qB = PatchCollection(patchesBest, cmap=matplotlib.cm.jet, alpha=0.9)
+        qB.set_array(np.array(colors))
+        ax.add_collection(qB)
+
+        
+        ax.set_xlim([0, 6236])
+        ax.set_ylim([4, 6])
+
+
+
+# ------------------------------------------
+if __name__ == '__main__':
+
+    Vdata = 'Vdata.json'
+    json_data=open( Vdata )
+    S = json.load(json_data)
+    json_data.close()
+
+    loci = "IGKV"
+    scale = 240.
+    exonLabels = [k for k in S[loci].iterkeys() ]
+    exons = [ (S[loci][k][1]/scale, S[loci][k][2]/scale) for k in exonLabels ]
+    cand_exons = exons
+
+    print exons
+    xL = np.array([x[0] for x in exons])
+    xR = np.array([x[1] for x in exons])
+    print np.min(xL), np.max(xR)
+
+    xstart= np.min(xL)
+    xend=np.max(xR)
+    D = plotExonMap ( exonLabels, exons, xstart, xend )
+    fig, ax = plt.subplots()
+    D.plot_refexons(fig, ax)
+
+
+    R={}
+    fp = open("vmres_igkvR5.dat", "r")
+    for lk in fp: 
+        rk=lk.split()
+        R.update( {rk[0]:( int(rk[1]), int(rk[2])) } )
+
+    fp.close()
+    for k in R.iterkeys():
+        print k, R[k]
+
+    #Delta=83967455    ## TRAV:  chr7
+    #Delta=179305555   ## TRBV  chr3
+    #Delta=65303593 ## IGLV  chr10
+    Delta=88936957  ## IGKV  chr13
+
+    exonLabels = [k for k in R.iterkeys() ]
+    Vexons = [ ((R[k][0]+Delta)/scale, (R[k][1]+Delta)/scale) for k in exonLabels ]
+
+    print Vexons
+    xL = np.array([x[0] for x in exons])
+    xR = np.array([x[1] for x in exons])
+    print np.min(xL), np.max(xR)
+
+
+    y=4.65
+    D.plot_Vexons( y, Vexons, fig, ax)
+
+
+    ### Now from vgenextractor.....
+    T={}
+    fp = open("Vextr_igkv2.dat", "r")
+    for lk in fp: 
+        rk=lk.split()
+        T.update( {rk[0]: int(rk[1]) } )
+
+    for k in T.iterkeys():
+        print k, T[k]
+
+
+
+    exonLabels = [k for k in T.iterkeys() ]
+    Wexons = [ ((T[k]+Delta)/scale, (T[k]+300+Delta)/scale) for k in exonLabels ]
+
+    print Wexons
+    y=4.2
+    D.plot_Vexons( y, Wexons, fig, ax)
+
+    plt.show()
+

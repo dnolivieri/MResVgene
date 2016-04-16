@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+import math
+
+xdata = np.array([2.65, 2.80, 2.96, 3.80, 3.90, 4.60, 4.80, 4.90, 5.65, 5.92])
+ydata = np.sin(xdata)
+
+def func(x,p1,p2,p3): # HERE WE DEFINE A SIN FUNCTION THAT WE THINK WILL FOLLOW THE DATA DISTRIBUTION
+    return p1*np.sin(x*p2+p3)
+
+# Here you give the initial parameters for p0 which Python then iterates over
+# to find the best fit
+popt, pcov = curve_fit(func,xdata,ydata,p0=(1.0,1.0,1.0)) #THESE PARAMETERS ARE USER DEFINED
+
+print(popt) # This contains your two best fit parameters
+
+# Performing sum of squares
+p1 = popt[0]
+p2 = popt[1]
+p3 = popt[2]
+residuals = ydata - func(xdata,p1,p2,p3)
+fres = sum(residuals**2)
+
+print(fres) #THIS IS YOUR CHI-SQUARE VALUE!
+
+xaxis = np.linspace(1,7,100) # we can plot with xdata, but fit will not look good 
+curve_y = func(xaxis,p1,p2,p3)
+plt.plot(xdata,ydata,'*')
+plt.plot(xaxis,curve_y,'-')
+plt.show()

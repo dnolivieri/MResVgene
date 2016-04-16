@@ -1,0 +1,18 @@
+{
+  "pogona": {
+    "wgs":  "./reptiles/Pogona/Pogona_vitticeps_CEMB01.fasta",
+    "sdir": "./reptiles/Pogona",
+    "cntgs": "./reptiles/Pogona/Pogona_vitticeps_CEMB01.fasta",
+  "contigs": "./reptiles/Pogona/Pogona_vitticeps_CEMB01_cntgs.txt"
+  },
+
+  "Pan_paniscus":{
+      "cntgs":"/media/disk2TB/BioInf/VsGenomeB/mammals/Pan_paniscus/Pan_paniscus_AJFE01.fasta",
+      "contigs":"./mammals/Pan_paniscus/Pan_paniscus_AJFE01_cntgs.txt"
+   }
+  
+
+}
+
+
+

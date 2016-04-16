@@ -1,0 +1,14 @@
+{
+"Ophiophagus_hannah": {
+    "WGS":"/media/disk2TB/BioInf/VsGenomeB/reptiles/Ophiophagus_hannah/Ophiophagus_hannah_AZIM01.fasta",
+    "cntgs":"/media/disk2TB/BioInf/VsRF/vrefs/reptiles/Ophiophagus_hannah_cntg.txt"
+  },
+  "Ophisaurus_gracilis":{
+     "WGS":"/media/disk2TB/BioInf/VsGenomeB/reptiles/Ophisaurus_gracilis/O.gracilis.final.assembly.fasta",
+    "cntgs":""
+  },
+  "Pogona_vitticeps_CEMB01":{
+     "WGS":"/media/disk2TB/BioInf/VsGenomeB/reptiles/Pogona_vitticeps_CEMB01/Pogona_vitticeps_CEMB01.fasta",
+     "cntgs":""
+ }
+}

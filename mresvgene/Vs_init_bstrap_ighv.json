@@ -1,0 +1,9 @@
+{
+ "loci": {
+  "ighv" : "./bstrap/ighv_init.fasta",
+  "igkv" : "./bstrap/igkv_init.fasta"
+ }, 
+ "bkgnd": {
+    "bkg1": "./dataVgeneDB/noMotifsBcknd.fasta"
+  }
+}

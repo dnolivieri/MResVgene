@@ -1,0 +1,6 @@
+{
+"Pogona": {
+  "rf":"./studies/Pogona/Pogona_vitticeps_CEMB01_RF.fasta",
+  "ve":"./studies/Pogona/all_final.fa",
+  "all":"./studies/Pogona/pogona_combined.fa"}
+}

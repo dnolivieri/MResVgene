@@ -1,0 +1,17 @@
+#!/bin/bash
+
+lbar="Aotus_nancymaae_JYKP01_outV_cntg.txt Callithrix_jacchus_JRUL01_outV_cntg.txt Chlorocebus_AQIB0_outV_outV_cntg.txt Gorilla_gorilla_CABD02_outV_cntg.txt Macaca_fascicularis_AQIA01_outV_cntg.txt Macaca_mulatta_AANU01_outV_cntg.txt Macaca_nemestrina_JZLF01_outV_cntg.txt Mandrillus_leucophaeus_JYKQ01_outV_cntg.txt Microcebus_murinus_ABDC02_outV_cntg.txt Nomascus_leucogenys_ADFV01_outV_cntg.txt Pan_paniscus_AJFE01_outV_cntg.txt Pan_troglodytes_AACZ03_outV_cntg.txt Pan_anubis_AHZZ01_outV_cntg.txt Pongo_abelii_ABGA01_outV_cntg.txt Propithecus_coquereli_JZKE01_outV_cntg.txt Rhinopithecus_roxellana_JABR01_outV_cntg.txt Saimiri_AGCE01_outV_cntg.txt Tarsius_syrichta_ABRT02_outV_cntg.txt"
+
+
+for i in $lbar; do 
+  echo $i
+  touch $i
+done;
+
+
+lbar="Aotus_nancymaae_JYKP01_.fasta Callithrix_jacchus_JRUL01_outV.fasta Chlorocebus_AQIB0_outV_outV.fasta Gorilla_gorilla_CABD02_outV.fasta Macaca_fascicularis_AQIA01_outV.fasta Macaca_mulatta_AANU01_outV.fasta Macaca_nemestrina_JZLF01_outV.fasta Mandrillus_leucophaeus_JYKQ01_outV.fasta  Microcebus_murinus_ABDC02_outV.fasta Nomascus_leucogenys_ADFV01_outV.fasta Pan_paniscus_AJFE01_outV.fasta  Pan_troglodytes_AACZ03_outV.fasta Papio_anubis_AHZZ01_outV.fasta Pongo_abelii_ABGA01_outV.fasta Propithecus_coquereli_JZKE01_outV.fasta Rhinopithecus_roxellana_JABR01_outV.fasta Saimiri_AGCE01_outV.fasta Tarsius_syrichta_ABRT02_outV.fasta" 
+
+for i in $lbar; do 
+  echo $i
+  touch $i
+done;

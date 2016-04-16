@@ -1,0 +1,14 @@
+{"All": { 
+  "ighv" : "./dataVgeneDB/ighv-primates.fasta",
+  "iglv" : "./dataVgeneDB/iglv.fasta",
+  "igkv" : "./dataVgeneDB/igkv-primates.fasta",
+  "trav" : "./dataVgeneDB/trav.fasta",
+  "trbv" : "./dataVgeneDB/trbv.fasta",
+  "trgv" : "./dataVgeneDB/trgv.fasta",
+  "trdv" : "./dataVgeneDB/trdv.fasta", 
+  "bkg1" : "./dataVgeneDB/bkg_noMotif_1.fasta",
+  "bkg2" : "./dataVgeneDB/bkg_noMotif_2.fasta",
+  "bkg3" : "./dataVgeneDB/bkg_noMotif_3.fasta",
+  "bkg4" : "./dataVgeneDB/bkg_noMotif_4.fasta"
+}
+}

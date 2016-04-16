@@ -1,0 +1,178 @@
+#!/usr/bin/env python
+"""
+   dnolivieri:  23 dec 2015
+     Bootstrap workflow for the MR ensemble RF code.
+
+        grep \> all_R.fasta | awk -F"|" '{print $1; split($1,a,"-"); locus[a[3]]+=1}END{for (i in locus){print i, locus[i]}}'
+
+david@treg:/media/disk2TB/BioInf/VsRF/analysis/trees$ cat $(ls *_R.fasta) > all_R.fasta
+david@treg:/media/disk2TB/BioInf/VsRF/analysis/trees$ cat $(ls *_S.fasta) > all_S.fasta
+
+grep \> all_R.fasta | awk -F"|" '{split($1,a,"-"); s=sprintf("%s-%s", substr(a[2],1,6),a[3]); print s}'
+david@treg:/media/disk2TB/BioInf/VsRF/analysis/trees$ grep \> all_R.fasta | awk -F"|" '{split($1,a,"-"); s=sprintf("%s-%s", substr(a[2],1,6),a[3]); locus[s]+=1}END{for (i in locus){split(i,b,"-"); print b[2
+
+
+
+cat $(ls -1 *_R.fasta) > all_R.fasta; cat $(ls -1 *_S.fasta) > all_S.fasta
+
+
+### This is to get info: 
+grep \> all_R.fasta | awk -F"|" '{split($1,a,"-"); s=sprintf("%s-%s", substr(a[2],1,6),a[3]); locus[s]+=1}END{for (i in locus){split(i,b,"-"); print b[2],i, locus[i]}}' | sort
+
+"""
+import dendropy
+from dendropy.calculate import treemeasure
+from dendropy import treecalc
+from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio import SeqFeature
+import KdeDist01 as KDE
+
+class compareTrees:
+    def __init__(self, loci_classes):
+        self.loci_classes=loci_classes
+
+
+    def write_sequences(self, infile, M, extension):
+        outFile = infile.replace(".fasta",extension+".fasta")
+        ofile = open(outFile, "w")
+        for record in SeqIO.parse(infile, "fasta"):
+            if record.id.split("[")[0] in M: 
+                SeqIO.write(record, ofile, "fasta")
+
+        ofile.close()
+
+
+    def get_distance(self, infile):
+        """
+        tree = dendropy.Tree.get(
+            path="pythonidae.mle.nex",
+            schema="nexus")
+        """
+        tree = dendropy.Tree.get(
+            path=infile,
+            schema="newick")
+
+        pdm = treemeasure.PatristicDistanceMatrix(tree)
+        A = [ t.label for t in tree.taxon_namespace ]
+        #print A
+        Linitial = len(A)
+
+        #pdm = treecalc.PatristicDistanceMatrix(tree)
+        cnt=0
+        for i, t1 in enumerate(tree.taxon_namespace):
+            for t2 in tree.taxon_namespace[i+1:]:
+                if pdm(t1, t2) < 0.002: 
+                    cnt+=1
+                    #print("Distance between '%s' and '%s': %s" % (t1.label, t2.label, pdm(t1, t2)))
+                    print t1.label, t2.label
+                    if t1.label in A: 
+                        A.remove(t1.label)
+                    if t2.label in A: 
+                        A.remove(t2.label)
+
+        R = [i for i in A if 'RF' in i]
+        S = [i for i in A if 'Vs' in i]
+
+        
+        print "Tot initial=", Linitial
+        print "Total=", cnt
+
+        return R, S
+
+
+    def get_dist_data(self, infile, series):
+        D = {}
+        for l in self.loci_classes:
+            D.update({l:[]})
+        for record in SeqIO.parse(infile, "fasta"):
+            rec_name=str(record.id)
+            rec_desc=str(record.description)
+
+            mr_prob=0.0
+            if series=='R': 
+                mr_prob = float(rec_desc.split("|")[2])
+                locus=rec_name.split("-")[2]
+            else: 
+                mr_prob = float(rec_name.split("-")[3].split("[")[0])
+                locus=rec_name.split("-")[2]
+            if locus in self.loci_classes:
+                D[locus].append( (mr_prob, rec_name) )
+
+            if mr_prob>2.6:
+                print rec_name
+
+        return D
+
+
+
+    def getKdedistributions(self, infile, series):
+        D = self.get_dist_data(infile, series)
+        make_plots=True
+        Kd = KDE.KDEProbDistribution(D, self.loci_classes) 
+        if make_plots:
+            X_Means = Kd.get_kde_struct(show_plot=True)
+            print "X_Means=",X_Means
+        
+
+
+
+    def dist_pairs(self, t1x, t2x): 
+
+        tree = dendropy.Tree.get(
+            path=infile,
+            schema="newick")
+
+        pdm = treemeasure.PatristicDistanceMatrix(tree)
+        A = [ t.label for t in tree.taxon_namespace ]
+
+        for i, t1 in enumerate(tree.taxon_namespace):
+            for t2 in tree.taxon_namespace[i+1:]:
+                if ((t1.label.split("-")[0] == t1x) and (t2.label.split("-")[0] == t2x)) or ((t1.label.split("-")[0] == t2x) and (t2.label.split("-")[0] == t1x)):
+                    print t1.label, t2.label, pdm(t1, t2)
+                    
+# -----------------------------------------------
+if __name__ == '__main__':
+
+    
+
+    infile="Macaca_fascicularis_AQIA01.nwk"
+
+    mlist=["Chlorocebus_AQIB01.nwk","Gorilla_gorilla_CABD02.nwk","Macaca_fascicularis_AQIA01.nwk","Mandrillus_leucophaeus_JYKQ01.nwk","Microcebus_murinus_ABDC01.nwk","Nomascus_leucogenys_ADFV01.nwk","Pan_paniscus_AJFE01.nwk","Papio_anubis_AHZZ01.nwk","Pongo_abelii_ABGA01.nwk","Propithecus_coquereli_JZKE01.nwk","Rhinopithecus_roxellana_JABR01.nwk","Saimiri_AGCE01.nwk", "Tarsius_syrichta_ABRT01.nwk"]
+
+    #mlist=["Microcebus_murinus_ABDC01.nwk"]
+
+    mlist=["Macaca_mulatta_MMUL01.nwk"]
+    
+    loci_classes=[ 'ighv', 'iglv', 'igkv', 'trav','trbv','trgv', 'trdv']
+    T=compareTrees(loci_classes)
+
+
+    for i in mlist: 
+        infile = "./treeMacacaM/"+i
+        print infile
+        R,S = T.get_distance(infile)
+        print "len(R)=", len(R), "   len(S)=", len(S)
+        print "S=", S
+        
+        fstfile = infile.replace(".nwk", ".fasta")
+        T.write_sequences( fstfile, R, "_R")
+        T.write_sequences( fstfile, S, "_S")
+
+    """
+    #infile="./trees/all_R.fasta"
+    #T.getKdedistributions(infile, 'R')
+    
+    infile="./trees/all_S.fasta"
+    T.getKdedistributions(infile, 'S')
+
+    """
+
+
+    """
+    infile="./trees/Macaca_fascicularis_AQIA01.nwk"
+    t1 = 'Vs395'
+    t2=  'V93RF'
+    T.dist_pairs(t1, t2) 
+    """

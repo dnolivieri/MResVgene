@@ -1,0 +1,93 @@
+#!/usr/bin/env python
+import numpy as np
+import scipy as sp
+import os
+import matplotlib.pyplot as plt
+
+
+
+class MakeBarPlots:
+    def __init__(self, dR, dS, species, loci):
+        self.dR = dR
+        self.dS = dS
+
+        self.species = species
+        self.loci = loci
+
+
+
+        self.width = 0.25
+
+    def get_barvectors(self): 
+        def form_vectorsV2(dX):
+            Nlseq=[]
+            vbar = []
+            for k in self.loci: 
+                print k
+                v = [ int(dX[x][k]) for x in dX.keys() ]
+                print v
+                vbar.append(np.array(v))
+            return vbar
+            
+
+        
+        vbar = form_vectorsV2(self.dR)
+        wbar = form_vectorsV2(self.dS)
+        return vbar, wbar
+
+    def barplot(self, Vmu, Wmu):
+        fig = plt.figure(figsize=(10,6))
+        fig.canvas.set_window_title('Comparison')
+        ax1 = fig.add_subplot(111)
+        plt.subplots_adjust(left=0.075, right=0.95, top=0.9, bottom=0.25)
+        Xbar= np.arange(len(Vmu[0]))
+        N=len(Vmu[0])
+
+        print "Xbar=", Xbar
+        print "Vmu[0]=", Vmu[0]
+        print "Vmu[1]=", Vmu[1]
+        print sum([Vmu[0]])
+        p1 = plt.bar(Xbar, Vmu[0],   self.width, color='#5C755E')  
+        p2 = plt.bar(Xbar, Vmu[1],   self.width, color='#F7DCB4', bottom=sum([Vmu[0]]))  
+        p3 = plt.bar(Xbar, Vmu[2],   self.width, color='#A97D5D', bottom=sum([Vmu[0], Vmu[1]]) ) 
+        p4 = plt.bar(Xbar, Vmu[3],   self.width, color='#87A96B', bottom=sum([Vmu[0], Vmu[1], Vmu[2] ]))
+        p5 = plt.bar(Xbar, Vmu[4],   self.width, color='#5F9EA0', bottom=sum([Vmu[0], Vmu[1], Vmu[2], Vmu[3]]))
+        p6 = plt.bar(Xbar, Vmu[5],   self.width, color='#475F77', bottom=sum([Vmu[0], Vmu[1], Vmu[2], Vmu[3], Vmu[4]]))
+        p7 = plt.bar(Xbar, Vmu[6],   self.width, color='#EDC844', bottom=sum([Vmu[0], Vmu[1], Vmu[2], Vmu[3], Vmu[4],  Vmu[5]]))
+
+
+        q1 = plt.bar(Xbar+self.width+0.05, Wmu[0],   self.width, color='#5C755E', hatch='/')  
+        q2 = plt.bar(Xbar+self.width+0.05, Wmu[1],   self.width, color='#F7DCB4', bottom=sum([Wmu[0]]),hatch='/')  
+        q3 = plt.bar(Xbar+self.width+0.05, Wmu[2],   self.width, color='#A97D5D', bottom=sum([Wmu[0], Wmu[1]]), hatch='/') 
+        q4 = plt.bar(Xbar+self.width+0.05, Wmu[3],   self.width, color='#87A96B', bottom=sum([Wmu[0], Wmu[1], Wmu[2] ]), hatch='/')
+        q5 = plt.bar(Xbar+self.width+0.05, Wmu[4],   self.width, color='#5F9EA0', bottom=sum([Wmu[0], Wmu[1], Wmu[2], Wmu[3]]), hatch='/')
+        q6 = plt.bar(Xbar+self.width+0.05, Wmu[5],   self.width, color='#475F77', bottom=sum([Wmu[0], Wmu[1], Wmu[2], Wmu[3], Wmu[4]]), hatch='/')
+        q7 = plt.bar(Xbar+self.width+0.05, Wmu[6],   self.width, color='#EDC844', bottom=sum([Wmu[0], Wmu[1], Wmu[2], Wmu[3], Wmu[4],  Wmu[5]]),hatch='/')
+
+
+        plt.ylabel('Mean number of genes')
+        plt.legend( (p1[0], p2[0],p3[0],p4[0], p5[0],p6[0],p7[0]), ('IGHV', 'IGLV', 'IGKV', 'TRAV', 'TRBV', 'TRDV','TRGV'), loc=1, prop={'size':10} )
+
+        taxalabels=self.species
+
+        tlables=True
+        if tlables==True: 
+            plt.xticks(Xbar+0.1, taxalabels )
+            xtickNames = plt.setp(ax1, xticklabels=np.repeat(taxalabels, 1))
+            plt.setp(xtickNames, rotation=90, fontsize=10)
+
+        plt.ylim([0,21])
+
+        #plt.ylim([240,600])
+        plt.show()
+
+
+
+if __name__ == "__main__":
+
+
+    
+    species=["AQIB01","CABD02","AQIA01","JYKQ01","ABDC01","ADFV01","AJFE01","AHZZ01","ABGA01","JZKE01","JABR01","AGCE01", "ABRT01"]
+    loci= ['ighv','iglv', 'igkv','trav','trbv','trdv','trgv']
+    M = MakeBarPlots(dR, dS, species, loci)
+    M.get_barvectors()

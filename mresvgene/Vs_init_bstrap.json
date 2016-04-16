@@ -1,0 +1,9 @@
+{
+  "ighv" : "./bstrap/ighv_init.fasta",
+  "iglv" : "./bstrap/iglv_init.fasta",
+  "igkv" : "./bstrap/igkv_init.fasta",
+  "trav" : "./bstrap/trav_init.fasta",
+  "trbv" : "./bstrap/trbv_init.fasta",
+  "trgv" : "./bstrap/trgv_init.fasta",
+  "trdv" : "./bstrap/trdv_init.fasta" 
+}

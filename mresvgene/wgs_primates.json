@@ -1,0 +1,128 @@
+{
+ "Aotus_JYKP01": { 
+   "WGS":"../VsGenomeB/mammals/Aotus_nancymaae_JYKP01/Aotus_nancymaae_JYKP01.fasta", 
+   "cntgs":"./vrefs/primates/Aotus_nancymaae_JYKP01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Aotus_nancymaae_JYKP01.fasta"
+  },
+
+ "Callithrix_JRUL01": {
+   "WGS":"../VsGenomeB/mammals/Callithrix_jacchus_JRUL01/Callithrix_jacchus_JRUL01.fasta",
+   "cntgs":"./vrefs/primates/Callithrix_jacchus_JRUL01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Callithrix_jacchus_JRUL01_outV.fasta"
+  },
+
+ "Chlorocebus_AQIB01":{
+   "WGS":"../VsGenomeB/mammals/Chlorocebus/Chlorocebus_AQIB01.fasta", 
+   "cntgs":"./vrefs/primates/Chlorocebus_AQIB01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Chlorocebus_AQIB01_outV.fasta"
+  },
+
+ "Gorilla_CABD02":{
+   "WGS":"../VsGenome/mammals/Gorilla/Gorilla_gorilla_CABD02.fasta",
+   "cntgs":"./vrefs/primates/Gorilla_gorilla_CABD02_outV_cntg.txt",
+   "vref":"./vrefs/primates/Gorilla_gorilla_CABD02_outV.fasta"
+  },
+
+ "Macacaf_AQIA01": {
+   "WGS":"../VsGenomeB/mammals/Macaca_fascicularis_AQIA01/Macaca_fascicularis_AQIA01.fasta", 
+   "cntgs":"./vrefs/primates/Macaca_fascicularis_AQIA01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Macaca_fascicularis_AQIA01_outV.fasta"
+ },
+
+ "Macacam_AANU01": {
+   "WGS":"../VsGenomeB/mammals/Macaca_mulatta_AANU01/Macaca_mulatta_AANU01.fasta",
+   "cntgs":"./vrefs/primates/Macaca_mulatta_AANU01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Macaca_mulatta_AANU01_outV.fasta"
+ },
+
+ "Macacam_MMUL1": {
+   "WGS":"../VsGenomeB/mammals/Macaca_mulatta_ENSBL/Macaca_mulatta_MMUL1_r.fasta",
+   "cntgs":"./vrefs/primates/Macaca_mulatta_MMUL1_outV_cntg.txt",
+   "vref":"./vrefs/primates/Macaca_mulatta_MMUL1_outV.fasta"
+ },
+
+
+ "Macacam_MMUL1S": {
+   "WGS":"./analysis/MacacaMstudy/Macaca_mulatta_MMUL1_chr3.fasta",
+   "cntgs":"./vrefs/primates/Macaca_mulatta_MMUL1_outV_cntg.txt",
+   "vref":"./vrefs/primates/Macaca_mulatta_MMUL1_outV.fasta"
+ },
+
+
+ "Macacan_JZLF01":{
+   "WGS":"../VsGenomeB/mammals/Macaca_nemestrina_JZLF01/Macaca_nemestrina_JZLF01.fasta",
+   "cntgs":"./vrefs/primates/Macaca_nemestrina_JZLF01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Macaca_nemestrina_JZLF01_outV.fasta"
+ },
+
+ "Mandrillus_JYKQ01":{
+   "WGS":"../VsGenomeB/mammals/Mandrillus_leucophaeus_JYKQ01/Mandrillus_leucophaeus_JYKQ01.fasta",
+   "cntgs":"./vrefs/primates/Mandrillus_leucophaeus_JYKQ01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Mandrillus_leucophaeus_JYKQ01_outV.fasta"
+ },
+
+ "Microcebus_ABDC01":{
+   "WGS":"../VsGenome/mammals/Microcebus_murinus_ABDC01/Microcebus_murinus_ABDC01.fasta",
+   "cntgs":"./vrefs/primates/Microcebus_murinus_ABDC01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Microcebus_murinus_ABDC01_outV.fasta"
+ },
+
+ "Nomascus_ADFV01":{
+   "WGS":"../VsGenomeB/mammals/Nomascus_leucogenys_ADFV01/Nomascus_leucogenys_ADFV01.fasta",
+   "cntgs":"./vrefs/primates/Nomascus_leucogenys_ADFV01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Nomascus_leucogenys_ADFV01_outV.fasta"
+ },
+
+ "Panp_AJFE01":{
+   "WGS":"../VsGenomeB/mammals/Pan_paniscus/Pan_paniscus_AJFE01.fasta", 
+   "cntgs":"./vrefs/primates/Pan_paniscus_AJFE01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Pan_paniscus_AJFE01_outV.fasta"
+ },
+
+ "Pant_AACZ03":{
+   "WGS":"../VsGenome/mammals/Chimpanzee/Chimpanzee_AACZ03.fasta", 
+   "cntgs":"./vrefs/primates/Pan_troglodytes_AACZ03_outV_cntg.txt",
+   "vref":"./vrefs/primates/Pan_troglodytes_AACZ03_outV.fasta"
+ },
+
+ "Papio_AHZZ01":{
+   "WGS":"../VsGenomeB/mammals/Papio_anubis_AHZZ01/Papio_anubis_AHZZ01.fasta", 
+   "cntgs":"./vrefs/primates/Papio_anubis_AHZZ01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Papio_anubis_AHZZ01_outV.fasta"
+ },
+
+ "Pongo_ABGA01":{
+   "WGS":"../VsGenome/mammals/Orangatan/Pongo_abelii_ABGA01.fasta", 
+   "cntgs":"./vrefs/primates/Pongo_abelii_ABGA01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Pongo_abelii_ABGA01_outV.fasta"
+ },
+
+ "Propithecus_JZKE01":{
+   "WGS":"../VsGenomeB/mammals/Propithecus_coquereli_JZKE01/Propithecus_coquereli_JZKE01.fasta",
+   "cntgs":"./vrefs/primates/Propithecus_coquereli_JZKE01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Propithecus_coquereli_JZKE01_outV.fasta"
+ },
+
+
+ "Rhinopithecus_JABR01":{ 
+   "WGS":"../VsGenomeB/mammals/Rhinopithecus_roxellana_JABR01/Rhinopithecus_roxellana_JABR01.fasta", 
+   "cntgs":"./vrefs/primates/Rhinopithecus_roxellana_JABR01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Rhinopithecus_roxellana_JABR01_outV.fasta"
+ },
+
+ "Saimiri_AGCE01":{
+   "WGS":"../VsGenomeB/mammals/Saimiri/Saimiri_AGCE01.fasta", 
+   "cntgs":"./vrefs/primates/Saimiri_AGCE01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Saimiri_AGCE01_outV.fasta"
+ }, 
+
+ "Tarsius_ABRT01":{
+   "WGS":"/media/disk2TB/BioInf/VsGenome/mammals/Tarsier/Tarsier_ABRT01.fasta", 
+   "cntgs":"./vrefs/primates/Tarsius_syrichta_ABRT01_outV_cntg.txt",
+   "vref":"./vrefs/primates/Tarsius_syrichta_ABRT01_outV.fasta"
+ }
+}
+
+
+
+
